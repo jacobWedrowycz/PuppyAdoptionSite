@@ -1,4 +1,4 @@
-# My first test with scenario: Adopt Brooke, add a Chewy Toy and a Travel Carrier, pay with Check
+# My second test with scenario: Adopt Sparky, add a Collar & Leash, pay with Credit Card
 
 from selenium import webdriver
 import time
@@ -15,9 +15,14 @@ title = driver.title
 # print the page title
 print(title)
 
-# click on specific Puppy named Brook
+# click Next page button
 puppy_list_page = PuppyListPage(driver)
-puppy_list_page.click_button_by_css_selector("form.button_to[action='/puppies/4'] input.rounded_button")
+puppy_list_page.click_next_button("a.next_page")
+time.sleep(1)
+
+
+# click on specific Puppy named Sparky
+puppy_list_page.click_button_by_css_selector("form.button_to[action='/puppies/9'] input.rounded_button")
 time.sleep(1)
 
 # click on 'Adopt Me!' button
@@ -27,8 +32,7 @@ time.sleep(1)
 
 # selecting checkboxes and clicking on 'Complete the adoption' button
 adoption_page = CartSummary(driver)
-adoption_page.select_toy_checkbox()
-adoption_page.select_carrier_checkbox()
+adoption_page.select_collar_checkbox()
 adoption_page.click_complete_the_adoption_button()
 time.sleep(1)
 
@@ -37,7 +41,7 @@ finalizing_page = FinalizingAdoption(driver)
 finalizing_page.enter_name("Adam Salamon")
 finalizing_page.enter_address("Stachiewicza 40a/18, 30-328 Kraków")
 finalizing_page.enter_email("adam.salamon289@gmail.com")
-finalizing_page.select_pay_type("Check")
+finalizing_page.select_pay_type("Credit card")
 finalizing_page.click_place_order()
 time.sleep(1)
 
