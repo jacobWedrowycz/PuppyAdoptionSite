@@ -1,50 +1,45 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-import time
+# My first test with scenario: Adopt Brooke, add a Chewy Toy and a Travel Carrier, pay with Check
 
+from selenium import webdriver
+import time
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import Select
+from pages.puppy_list import PuppyListPage
+from pages.puppy_details import PuppyDetails
+from pages.cart_summary import CartSummary
+from pages.finalizing_adoption import FinalizingAdoption
 
 driver = webdriver.Chrome(service=Service(r'C:\TestFiles\chromedriver.exe'))
 driver.get("https://spartantest-puppies.herokuapp.com/")
 title = driver.title
+
+# print the page title
 print(title)
-assert 'The Spartan\'s Puppy Adoption Agency' == title
 
-ViewDetailsButton1 = driver.find_element(By.CSS_SELECTOR, "form.button_to[action='/puppies/4'] input.rounded_button")
-ViewDetailsButton1.click()
+# click on specific Puppy named Brook
+puppy_list_page = PuppyListPage(driver)
+puppy_list_page.click_button_by_css_selector("form.button_to[action='/puppies/4'] input.rounded_button")
+time.sleep(1)
 
-AdoptMeButton1 = driver.find_element(By.CSS_SELECTOR, "form.button_to[action='/adoptions?puppy_id=4'] "
-                                                      "input.rounded_button")
-AdoptMeButton1.click()
+# click on 'Adopt Me!' button
+puppy_details_page = PuppyDetails(driver)
+puppy_details_page.click_adopt_me_button()
+time.sleep(1)
 
-checkbox1 = driver.find_element(By.XPATH, "//input[@name='toy']")
-checkbox2 = driver.find_element(By.XPATH, "//input[@name='carrier']")
+# selecting checkboxes and clicking on 'Complete the adoption' button
+adoption_page = CartSummary(driver)
+adoption_page.select_toy_checkbox()
+adoption_page.select_carrier_checkbox()
+adoption_page.click_complete_the_adoption_button()
+time.sleep(1)
 
-if not checkbox1.is_selected():
-    checkbox1.click()
+# entering our data, selecting the payment method, and clicking on "Place Order" button
+finalizing_page = FinalizingAdoption(driver)
+finalizing_page.enter_name("Adam Salamon")
+finalizing_page.enter_address("Stachiewicza 40a/18, 30-328 Kraków")
+finalizing_page.enter_email("adam.salamon289@gmail.com")
+finalizing_page.select_pay_type("Check")
+finalizing_page.click_place_order()
 
-if not checkbox2.is_selected():
-    checkbox2.click()
 
-ViewDetailsButton1 = driver.find_element(By.CSS_SELECTOR, "form.button_to[action='/orders/new'] input.rounded_button")
-ViewDetailsButton1.click()
-
-field_name = driver.find_element(By.ID, "order_name")
-field_address = driver.find_element(By.ID, "order_address")
-field_email = driver.find_element(By.ID, "order_email")
-field_pay_type = driver.find_element(By.ID, "order_pay_type")
-
-field_name.send_keys("Adam Salamon")
-field_address.send_keys("Stachiewicza 40a/18, 30-328 Kraków")
-field_email.send_keys("adam.salamon289@gmail.com")
-field_pay_type.click()
-option_check = driver.find_element(By.XPATH, "//select[@id='order_pay_type']/option[@value='Check']")
-option_check.click()
-
-PlaceOrderButton = driver.find_element(By.CSS_SELECTOR, "button.submit")
-PlaceOrderButton.click()
-
-time.sleep(5) #sleep for 5sec before closing browser
-
+# sleep for 5sec before closing browser
+time.sleep(5)
