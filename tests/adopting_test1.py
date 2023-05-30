@@ -1,7 +1,6 @@
 # My first test with scenario: Adopt Brooke, add a Chewy Toy and a Travel Carrier, pay with Check
 
 from selenium import webdriver
-import time
 from selenium.webdriver.chrome.service import Service
 from pages.puppy_list import PuppyListPage
 from pages.puppy_details import PuppyDetails
@@ -30,7 +29,6 @@ puppy_details_page.click_adopt_me_button()
 checkboxes_to_select = ["collar", "toy"]
 adoption_page.select_checkboxes(checkboxes_to_select)
 adoption_page.click_complete_the_adoption_button()
-time.sleep(1)
 
 # entering our data, selecting the payment method, and clicking on "Place Order" button
 finalizing_page.enter_data("Adam Salamon", "Stachiewicza 40a/18, 30-328 Kraków", "adam.salamon289@gmail.com")
@@ -39,6 +37,5 @@ finalizing_page.click_place_order()
 
 # checking if the puppy became successfully adopted
 finalizing_page.check_notice_text()
-print("Puppy became successfully adopted")
-time.sleep(1)
+print("Puppy became successfully adopted - test passed")
 driver.close()

@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class FinalizingAdoption:
 
@@ -25,5 +26,7 @@ class FinalizingAdoption:
         place_order_button.click()
 
     def check_notice_text(self):
-        notice_element = self.driver.find_element(By.ID, 'notice')
+        notice_element = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.ID, 'notice'))
+        )
         assert notice_element.text == "Thank you for adopting a puppy!"

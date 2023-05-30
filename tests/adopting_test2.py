@@ -1,7 +1,6 @@
 # My second test with scenario: Adopt Sparky, add a Collar & Leash, pay with Credit Card
 
 from selenium import webdriver
-import time
 from selenium.webdriver.chrome.service import Service
 from pages.puppy_list import PuppyListPage
 from pages.puppy_details import PuppyDetails
@@ -45,8 +44,7 @@ finalizing_page.click_place_order()
 
 # checking if the puppy became successfully adopted
 finalizing_page.check_notice_text()
-print("Puppy became successfully adopted")
-
+print("Puppy became successfully adopted - test passed")
 driver.close()
 
 
