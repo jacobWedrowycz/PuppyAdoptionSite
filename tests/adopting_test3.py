@@ -11,40 +11,39 @@ driver = webdriver.Chrome(service=Service(r'C:\TestFiles\chromedriver.exe'))
 driver.get("https://spartantest-puppies.herokuapp.com/")
 title = driver.title
 
+puppy_list_page = PuppyListPage(driver)
+puppy_details_page = PuppyDetails(driver)
+adoption_page = CartSummary(driver)
+finalizing_page = FinalizingAdoption(driver)
+
 # print the page title
 print(title)
 
-
-# selecting a first random puppy
-puppy_list_page = PuppyListPage(driver)
+# select a first random puppy
 puppy_list_page.click_random_button_of_puppy()
 
 # click on 'Adopt Me!' button
-puppy_details_page = PuppyDetails(driver)
 puppy_details_page.click_adopt_me_button()
 
-# selecting collar checkbox and click on 'Adopt Another Puppy' button
-adoption_page = CartSummary(driver)
+# select collar checkbox and click on 'Adopt Another Puppy' button
 checkboxes_to_select = ["collar"]
 adoption_page.select_checkboxes(checkboxes_to_select)
 adoption_page.click_adopt_another_puppy_button()
 
-# selecting a second random puppy on second page
+# select a second random puppy on second page
 puppy_list_page = PuppyListPage(driver)
 puppy_list_page.click_next_navigation_button()
 puppy_list_page.click_random_button_of_puppy()
 puppy_details_page.click_adopt_me_button()
 
-adoption_page = CartSummary(driver)
 adoption_page.click_complete_the_adoption_button()
 
-# entering our data, selecting the payment method, and clicking on "Place Order" button
-finalizing_page = FinalizingAdoption(driver)
+# enter your data, select the payment method, and click on "Place Order" button
 finalizing_page.enter_data("Adam Salamon", "Stachiewicza 40a/18, 30-328 Kraków", "adam.salamon289@gmail.com")
 finalizing_page.select_pay_type("Credit card")
 finalizing_page.click_place_order()
 
-# checking if the puppy became successfully adopted
+# check if the puppy became successfully adopted
 finalizing_page.check_notice_text()
 print("2 random Puppies became successfully adopted - test passed")
 driver.close()

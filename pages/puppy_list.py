@@ -6,7 +6,7 @@ class PuppyListPage:
     def __init__(self, driver):
         self.driver = driver
 
-    def click_details_button_of_brook(self):
+    def click_details_button_of_brooke(self):
         button = self.driver.find_element(By.CSS_SELECTOR,"form.button_to[action='/puppies/4']")
         button.click()
 

@@ -1,5 +1,5 @@
-# My first test with scenario: Adopt Brooke, add a Chewy Toy and a Travel Carrier, pay with Check
-
+# My third test with scenario: Adopt 2 Random Dogs add a 3 Random Accessories to 1, pay with Credit Card
+import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from pages.puppy_list import PuppyListPage
@@ -19,23 +19,33 @@ finalizing_page = FinalizingAdoption(driver)
 # print the page title
 print(title)
 
-# click on specific Puppy named Brook
-puppy_list_page.click_details_button_of_brooke()
+# select a first random puppy
+puppy_list_page.click_random_button_of_puppy()
 
 # click on 'Adopt Me!' button
 puppy_details_page.click_adopt_me_button()
 
-# select checkboxes and click on 'Complete the adoption' button
-checkboxes_to_select = ["collar", "toy"]
-adoption_page.select_checkboxes(checkboxes_to_select)
+# select 3 random checkboxes and click on 'Adopt Another Puppy' button
+random_3_checkboxes = adoption_page.random_3_checkboxes()
+adoption_page.select_checkboxes(random_3_checkboxes)
+time.sleep(1)
+adoption_page.click_adopt_another_puppy_button()
+
+# select a second random puppy on a second page
+puppy_list_page = PuppyListPage(driver)
+puppy_list_page.click_next_navigation_button()
+puppy_list_page.click_random_button_of_puppy()
+puppy_details_page.click_adopt_me_button()
+
 adoption_page.click_complete_the_adoption_button()
 
-# enter our data, select the payment method, and click on "Place Order" button
+# enter your data, select the payment method, and click on "Place Order" button
 finalizing_page.enter_data("Adam Salamon", "Stachiewicza 40a/18, 30-328 Kraków", "adam.salamon289@gmail.com")
-finalizing_page.select_pay_type("Check")
+finalizing_page.select_pay_type("Credit card")
 finalizing_page.click_place_order()
 
-# check if the puppy became successfully adopted
+# checking if the puppy became successfully adopted
 finalizing_page.check_notice_text()
-print("Puppy became successfully adopted - test passed")
+print("2 random Puppies became successfully adopted - test passed")
 driver.close()
+
