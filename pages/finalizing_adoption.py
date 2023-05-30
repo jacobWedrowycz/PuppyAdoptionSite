@@ -1,11 +1,14 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+
+
 class FinalizingAdoption:
+
     def __init__(self, driver):
         self.driver = driver
 
     def enter_name(self, name):
-        field_name = self.driver.find_element(By.ID, "order_name")
+        field_name = self.driver.find_element(By.XPATH, "//input[@name='order[name]']")
         field_name.send_keys(name)
 
     def enter_address(self, address):
@@ -24,7 +27,3 @@ class FinalizingAdoption:
     def click_place_order(self):
         place_order_button = self.driver.find_element(By.CSS_SELECTOR, "button.submit")
         place_order_button.click()
-
-
-
-

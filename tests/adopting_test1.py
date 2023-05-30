@@ -41,5 +41,4 @@ finalizing_page.select_pay_type("Check")
 finalizing_page.click_place_order()
 time.sleep(1)
 
-# sleep for 5sec before closing browser
-time.sleep(5)
+
