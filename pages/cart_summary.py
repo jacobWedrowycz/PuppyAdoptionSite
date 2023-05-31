@@ -5,6 +5,7 @@ class CartSummary:
     def __init__(self, driver):
         self.driver = driver
 
+# first method is selecting checkboxes for first puppy
     def select_checkbox(self, checkbox_id):
         checkbox = self.driver.find_element(By.CSS_SELECTOR, f"input#{checkbox_id}")
         checkbox.click()
@@ -12,6 +13,17 @@ class CartSummary:
     def select_checkboxes(self, checkbox_ids):
         for checkbox_id in checkbox_ids:
             self.select_checkbox(checkbox_id)
+
+# second method is selecting checkboxes for each puppy
+    def select_checkbox_1(self, checkbox_id_1):
+        checkbox = self.driver.find_element(By.CSS_SELECTOR, f"input#{checkbox_id_1}")
+        checkbox.click()
+
+    def select_checkboxes_1(self, checkbox_ids_1):
+        for checkbox_id_1 in checkbox_ids_1:
+            checkboxes = self.driver.find_elements(By.CSS_SELECTOR, f"input#{checkbox_id_1}")
+            for checkbox in checkboxes:
+                checkbox.click()
 
     def random_3_checkboxes(self):
         checkboxes = ["collar", "toy", "carrier", "vet"]

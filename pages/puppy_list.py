@@ -19,7 +19,6 @@ class PuppyListPage:
         random_button = random.choice(buttons)
         random_button.click()
 
-
     def click_next_navigation_button(self):
         button = self.driver.find_element(By.CSS_SELECTOR, "a.next_page")
         button.click()

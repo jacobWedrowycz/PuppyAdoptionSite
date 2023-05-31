@@ -25,10 +25,7 @@ puppy_list_page.click_random_button_of_puppy()
 # click on 'Adopt Me!' button
 puppy_details_page.click_adopt_me_button()
 
-# select 3 random checkboxes and click on 'Adopt Another Puppy' button
-random_3_checkboxes = adoption_page.random_3_checkboxes()
-adoption_page.select_checkboxes(random_3_checkboxes)
-time.sleep(1)
+# click on 'Adopt Another Puppy' button
 adoption_page.click_adopt_another_puppy_button()
 
 # select a second random puppy on a second page
@@ -36,16 +33,21 @@ puppy_list_page = PuppyListPage(driver)
 puppy_list_page.click_next_navigation_button()
 puppy_list_page.click_random_button_of_puppy()
 puppy_details_page.click_adopt_me_button()
+time.sleep(1)
 
+# select 3 random checkboxes for 1 puppy and click "Complete the Adoption" button
+random_3_checkboxes = adoption_page.random_3_checkboxes()
+adoption_page.select_checkboxes(random_3_checkboxes)
+time.sleep(1)
 adoption_page.click_complete_the_adoption_button()
 
 # enter your data, select the payment method, and click on "Place Order" button
 finalizing_page.enter_data("Adam Salamon", "Stachiewicza 40a/18, 30-328 Kraków", "adam.salamon289@gmail.com")
 finalizing_page.select_pay_type("Credit card")
 finalizing_page.click_place_order()
+time.sleep(1)
 
 # checking if the puppy became successfully adopted
 finalizing_page.check_notice_text()
 print("2 random Puppies became successfully adopted - test passed")
 driver.close()
-
